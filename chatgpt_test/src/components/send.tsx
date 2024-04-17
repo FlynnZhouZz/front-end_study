@@ -5,15 +5,27 @@
  * @Description: 发送组件
  */
 import React from 'react';
-import { Container } from '@material-ui/core';
+import { Paper, InputBase, IconButton, CircularProgress } from '@material-ui/core';
+import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
 
-import '@/styles/index.scss';
+import type { SendProps } from '@/types/components';
 
-function Send() {
+import '@/styles/components/send.scss';
+
+function Send(props: SendProps) {
     return (
-        <Container className="test">
-            123
-        </Container>
+        <Paper component='form' className='sendContainer'>
+            <InputBase
+                className='input'
+                multiline
+                placeholder='Message ChatGPT...'
+                inputProps={{ 'aria-label': 'Message ChatGPT' }}
+            />
+            <IconButton color='primary' className='btn' aria-label='send'>
+                <ArrowUpwardIcon className='icon' />
+                {/* <CircularProgress /> */}
+            </IconButton>
+        </Paper>
     );
 }
 

@@ -4,32 +4,37 @@
  * @Date: 2024-04-17 17:39:50
  * @Description: 聊天组件
  */
-import React, { useMemo } from 'react';
-import { Container } from '@material-ui/core';
+import React from 'react';
+import { Avatar } from '@material-ui/core';
 
 import type { ChatProps } from '@/types/components';
 
-import { Avatar } from '@material-ui/core';
-
 import '@/styles/components/chat.scss';
 
+import chatGPTSvg from '@/assets/chatGPT.svg';
+
+/** 头像组件 */
 const Ava = (props: { type: ChatProps['type'] }) => {
     const { type } = props;
-    return type === 1 ? <Avatar>CO</Avatar> : <Avatar>H</Avatar>;
+    return type === 1
+        ? <div className='avatar user'><Avatar className='userAva'>CO</Avatar></div>
+        : <div className='avatar gpt'><Avatar className='gptAva' src={chatGPTSvg} /></div>;
 };
 
+/** 名称组件 */
 const Name = (props: { name: ChatProps['name'] }) => {
     const { name } = props;
-    return <div>{name}</div>;
+    return <div className='name'>{name}</div>;
 };
 
 function Chat(props: ChatProps) {
+    const { name, msg = '' } = props;
     return (
         <div className='chatContainer'>
-            <Ava type={1} />
+            <Ava type={2} />
             <div className='chatR'>
-                <Name name='123' />
-                <p>1312</p>
+                <Name name={name} />
+                <p>{msg || '-'}</p>
             </div>
         </div>
     );

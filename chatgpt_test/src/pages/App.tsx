@@ -10,6 +10,7 @@ function App() {
     return (
         <Container maxWidth='sm'>
             <Chat type={1} name='You' />
+            <Send key='1' />
         </Container>
     );
 }

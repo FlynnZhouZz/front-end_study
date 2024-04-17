@@ -73,7 +73,7 @@
  * @param  $color  字体颜色，默认: $font
  * @param  $fontWeight  字体粗细，默认: 'normal'
  */
- @mixin font($fontSize: 14, $color: $font, $fontWeight: normal) {
+ @mixin font($fontSize: 14, $color: #333, $fontWeight: normal) {
     font-size: px($fontSize);
     color: $color;
     line-height: px($fontSize * 1.5);
