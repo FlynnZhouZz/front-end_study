@@ -8,15 +8,22 @@ import OpenAI from 'openai';
 
 import type { FetchPayload } from '@/types/utils';
 
-const openai = new OpenAI();
-
 /** OpenAI model */
 const openAIM = 'gpt-3.5-turbo';
 
-export const fetch = async (messages: FetchPayload) => {
+export const fetch = async (content: string, apiKey: string) => {
+    const openai = new OpenAI({
+        baseURL: "https://openrouter.ai/api/v1",
+        apiKey,
+        defaultHeaders: {
+            "HTTP-Referer": 'http://localhost:3000', // Optional, for including your app on openrouter.ai rankings.
+            "X-Title": 'ChatGPT test', // Optional. Shows in rankings on openrouter.ai.
+        },
+        dangerouslyAllowBrowser: true,
+    });
     const completion = await openai.chat.completions.create({
-        messages: [{ role: "system", content: "You are a helpful assistant." }],
+        messages: [{ role: "system", content }],
         model: openAIM,
     });
-    console.log(completion.choices[0]);
+    return completion.choices[0];
 };

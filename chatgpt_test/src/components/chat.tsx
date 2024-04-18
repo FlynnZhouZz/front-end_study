@@ -28,10 +28,10 @@ const Name = (props: { name: ChatProps['name'] }) => {
 };
 
 function Chat(props: ChatProps) {
-    const { name, msg = '' } = props;
+    const { type, name, msg = '' } = props;
     return (
         <div className='chatContainer'>
-            <Ava type={2} />
+            <Ava type={type} />
             <div className='chatR'>
                 <Name name={name} />
                 <p>{msg || '-'}</p>

@@ -8,6 +8,7 @@
         height: px(25);
         border-radius: px(15);
         @include flex($layout: "CC");
+        flex-shrink: 0;
         margin-right: px(15);
         overflow: hidden;
         &.user {

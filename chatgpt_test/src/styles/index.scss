@@ -1,1 +1,38 @@
+@import "~@/styles/app.scss";
+
+.container {
+    position: relative;
+    display: flex !important;
+    flex-direction: column;
+    height: 100vh;
+    padding: px(20) 0;
+    overflow-y: hidden;
+    .chatBox {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        margin-bottom: px(15);
+        overflow-y: auto;
+    }
+    .sendBox {
+        @include flex($layout: 'SbC');
+        .btnKey {
+            height: px(40);
+            margin-left: px(12);
+        }
+    }
+    .emptyBox {
+        @include flex(column, 'CC');
+        height: 100%;
+
+        .gptLogo {
+            width: px(45);
+            height: px(45);
+            margin-bottom: px(15);
+        }
+        p {
+            @include font(20, #333, bold);
+        }
+    }
+}
 

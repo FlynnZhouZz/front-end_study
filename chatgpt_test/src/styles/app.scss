@@ -36,8 +36,11 @@
  @mixin flex($fd: row, $layout: "SS", $fw: nowrap) {
     display: flex;
     flex-direction: $fd;
-    @if $layout != "SS" {
+    @if $layout == "SC" or $layout == "SbC" or $layout == "SaC" or $layout == "CC" {
         align-items: center;
+    }
+    @if $layout == "SE" or $layout == "SbE" or $layout == "SaE" or $layout == "CE" {
+        align-items: flex-end;
     }
     @if $layout == "CC" {
         justify-content: center;

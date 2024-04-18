@@ -23,8 +23,15 @@ export type ChatProps = {
 
 /** send组件 props */
 export type SendProps = {
-    /** OpenRouter API key */
-    key: string;
-    /** 留言 */
-    msg?: string;
+    /** 回调函数 */
+    onSend: (msg: string, cb?: () => void) => void;
+};
+
+
+/** openRouter key 组件 props */
+export type OpenRouterKeyProps = {
+    /** 是否展示 */
+    open: boolean;
+    /** 回调函数 */
+    onCb: (key?: string) => void;
 };

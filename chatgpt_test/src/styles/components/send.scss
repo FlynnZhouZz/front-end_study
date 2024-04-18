@@ -2,14 +2,23 @@
 
 .sendContainer {
     padding: 0 px(12);
-    @include flex($layout: 'SbC');
+    @include flex($layout: 'SbE');
+    align-self: flex-end;
+    width: 100%;
+    // position: absolute;
+    // bottom: px(20);
+    // left: 0;
+    // right: 0;
     .input {
         flex: 1;
+        min-height: px(40);
+        // max-height: px(120);
     }
     .btn {
         width: px(25);
         height: px(25);
         border-radius: px(4);
+        margin-bottom: px(7.5);
         overflow: hidden;
         background-color: #e9e9e9;
         .icon {
@@ -17,5 +26,10 @@
             height: px(18);
             color: white;
         }
+        .MuiIconButton-label {
+            width: px(18);
+            height: px(18);
+        }
+
     }
 }
