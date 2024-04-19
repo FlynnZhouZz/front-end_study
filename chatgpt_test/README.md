@@ -1,5 +1,11 @@
 # chatgpt_test
 
+## 项目技术栈
+
+1. 框架：ReactJS(create-react-app)
+2. 开发语言：Typescript + sass；
+3. AI库：openai
+
 ## 运行项目
 
 1/ 安装依赖
@@ -17,10 +23,6 @@ yarn start
 or
 npm run
 ```
-
-## 运行效果
-
-![运行效果图](/assets/todos.gif)
 
 ## 可用脚本
 
@@ -48,3 +50,7 @@ npm run
 您可以在 [Create React App 文档](https://facebook.github.io/create-react-app/docs/getting-started) 中了解更多信息。
 要学习 React，请查看 [React 文档](https://reactjs.org/)。
 
+
+## `OpenRouter API key`的获取
+
+访问[openrouter](https://openrouter.ai)注册使用免费提供的key即可。
