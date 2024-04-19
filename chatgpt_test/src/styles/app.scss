@@ -86,6 +86,10 @@
     word-wrap: break-word;
 }
 
+body {
+    overflow: hidden;
+}
+
 div,h1,p,ul,ol,li {
     margin: 0;
     padding: 0;

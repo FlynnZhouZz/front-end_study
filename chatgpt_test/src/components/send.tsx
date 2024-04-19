@@ -22,11 +22,16 @@ function Send(props: SendProps) {
         setDisabled(true);
         onSend(val, () => {
             setDisabled(false);
+            setVal('');
         });
     }, [disabled, val, onSend]);
-    const handleIpt = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleIpt: React.ChangeEventHandler<HTMLTextAreaElement | HTMLInputElement> = useCallback((e) => {
         setVal(e.target.value);
     }, []);
+    const handleKeyDown: React.KeyboardEventHandler<HTMLTextAreaElement | HTMLInputElement> = useCallback((e) => {
+        // 监听键盘事件  当用户按下ctrl+enter组合键，快捷发送消息
+        if (e?.ctrlKey && e?.key === 'Enter') handleSend();
+    }, [handleSend]);
 
     return (
         <Paper component='form' className='sendContainer'>
@@ -39,6 +44,7 @@ function Send(props: SendProps) {
                 inputProps={{ 'aria-label': 'Message ChatGPT' }}
                 value={val}
                 onChange={handleIpt}
+                onKeyDown={handleKeyDown}
             />
             <IconButton color='primary' className='btn' aria-label='send' onClick={handleSend}>
                 {disabled ? <CircularProgress size={14} className='iconLoading' /> : <ArrowUpwardIcon className='icon' />}

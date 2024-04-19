@@ -6,8 +6,6 @@
  */
 import OpenAI from 'openai';
 
-import type { FetchPayload } from '@/types/utils';
-
 /** OpenAI model */
 const openAIM = 'gpt-3.5-turbo';
 
@@ -22,8 +20,9 @@ export const fetch = async (content: string, apiKey: string) => {
         dangerouslyAllowBrowser: true,
     });
     const completion = await openai.chat.completions.create({
-        messages: [{ role: "system", content }],
+        messages: [{ role: "user", content }],
         model: openAIM,
+        // stream: true,
     });
     return completion.choices[0];
 };

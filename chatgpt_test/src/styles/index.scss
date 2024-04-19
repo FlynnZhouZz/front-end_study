@@ -5,14 +5,17 @@
     display: flex !important;
     flex-direction: column;
     height: 100vh;
-    padding: px(20) 0;
+    padding: px(15) 0;
     overflow-y: hidden;
     .chatBox {
         display: flex;
         flex-direction: column;
         flex: 1;
-        margin-bottom: px(15);
-        overflow-y: auto;
+        margin-bottom: px(20);
+        max-height: 83vh;
+        .MuiList-root {
+            overflow-y: auto;
+        }
     }
     .sendBox {
         @include flex($layout: 'SbC');
@@ -33,6 +36,10 @@
         p {
             @include font(20, #333, bold);
         }
+    }
+    .tips {
+        margin-top: px(12);
+        @include font(14, #666);
     }
 }
 

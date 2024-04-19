@@ -17,7 +17,7 @@ import openaiLogo from '@/assets/openai.png';
 import '@/styles/index.scss';
 
 function App() {
-    const listRef = useRef(null);
+    const listRef = useRef<HTMLUListElement | null>(null);
     const [open, setOpen] = useState(false);
     const [key, setKey] = useState('');
     const [list, setList] = useState<ChatProps[]>([]);
@@ -33,6 +33,10 @@ function App() {
     useEffect(() => {
         getKey();
     }, []);
+    useEffect(() => {
+        if (listRef.current) listRef.current.scrollTop = listRef.current?.scrollHeight + 200;
+        console.log(listRef.current, listRef.current?.scrollHeight)
+    }, [list]);
 
     const handleOpenCb = useCallback((key?: string) => {
         setOpen(!open);
@@ -71,7 +75,7 @@ function App() {
                         <p>How can I help you today?</p>
                     </div>
                 ) : (
-                    <List>
+                    <List ref={listRef}>
                         {list?.map((item, index) => (
                             <ListItem>
                                 <Chat key={index} {...item} />
@@ -92,6 +96,7 @@ function App() {
                     <VpnKeyIcon className='key' />
                 </IconButton>
             </div>
+            <p className='tips'>使用Ctrl + Enter快捷键可快速发送消息！</p>
             <OpenRouterKey open={open} onCb={handleOpenCb} />
         </Container>
     );
