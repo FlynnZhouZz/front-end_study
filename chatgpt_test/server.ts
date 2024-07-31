@@ -13,6 +13,7 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
+/* 聊天接口 */
 app.get('/chat', async (req, res, next) => {
     const { msg, key: apiKey } = req.query as { msg: string; key: string }; // 从 url 参数中获取 msg,key
     if (!apiKey) return;
@@ -20,28 +21,33 @@ app.get('/chat', async (req, res, next) => {
         res.end('query prompt is required');
         return;
     }
-    const openai = new OpenAI({
-        baseURL: "https://openrouter.ai/api/v1",
-        apiKey,
-        defaultHeaders: {
-            "HTTP-Referer": 'http://localhost:3001', // Optional, for including your app on openrouter.ai rankings.
-            "X-Title": 'ChatGPT test', // Optional. Shows in rankings on openrouter.ai.
-        },
-        // dangerouslyAllowBrowser: true,
-    });
-    const gptStream = await openai.chat.completions.create({
-        model: 'gpt-3.5-turbo',
-        messages: [{ role: 'user', content: msg }],
-        max_tokens: 500,
-        stream: true, // stream
-    })
 
-    res.writeHead(200, { 'Content-Type': 'text/event-stream' }) // 'text/event-stream' 标识 SSE 即 Server-Sent Events
+    try {
+        const openai = new OpenAI({
+            baseURL: "https://openrouter.ai/api/v1",
+            apiKey,
+            defaultHeaders: {
+                "HTTP-Referer": 'http://localhost:3001', // Optional, for including your app on openrouter.ai rankings.
+                "X-Title": 'ChatGPT test', // Optional. Shows in rankings on openrouter.ai.
+            },
+            // dangerouslyAllowBrowser: true,
+        });
+        const gptStream = await openai.chat.completions.create({
+            model: 'gpt-3.5-turbo',
+            messages: [{ role: 'user', content: msg }],
+            max_tokens: 500,
+            stream: true, // stream
+        })
 
-    for await (const chunk of gptStream) {
-        res.write(`data: ${JSON.stringify(chunk)}\n\n`) // 格式必须是 `data: xxx\n\n` ！！！
+        res.writeHead(200, { 'Content-Type': 'text/event-stream' }) // 'text/event-stream' 标识 SSE 即 Server-Sent Events
+
+        for await (const chunk of gptStream) {
+            res.write(`data: ${JSON.stringify(chunk)}\n\n`) // 格式必须是 `data: xxx\n\n` ！！！
+        }
+        res.end();
+    } catch (error) {
+        console.error('fetch openai error =>', error);
     }
-    res.end();
 });
 
 app.get("/:universalURL", (req, res) => {

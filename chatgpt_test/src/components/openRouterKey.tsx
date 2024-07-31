@@ -17,6 +17,7 @@ function Send(props: OpenRouterKeyProps) {
     const { open = false, onCb } = props;
     const [key, setKey] = useState('');
 
+    /* 初始化api key */
     const intiData = async () => {
         const k = await AsyncStorage.getItem(storageKey);
         if (k) setKey(k);
@@ -26,14 +27,19 @@ function Send(props: OpenRouterKeyProps) {
         intiData();
     }, [open]);
 
+    /* 监听关闭事件 */
     const handleClose = useCallback(() => {
         onCb?.();
     }, [onCb]);
+
+    /* 监听确认事件 */
     const handleConfirm = useCallback(async () => {
         await AsyncStorage.setItem(storageKey, key);
         onCb?.(key);
         setKey('');
     }, [onCb, key]);
+
+    /* 监听输入框 */
     const handleIpt = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
         setKey(e.target.value);
     }, []);

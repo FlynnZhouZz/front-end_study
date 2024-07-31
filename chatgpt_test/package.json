@@ -5,6 +5,7 @@
     "dependencies": {
         "@material-ui/core": "^4.12.4",
         "@material-ui/icons": "^4.11.3",
+        "@material-ui/lab": "^4.0.0-alpha.61",
         "@react-native-async-storage/async-storage": "^1.23.1",
         "@testing-library/jest-dom": "^5.17.0",
         "@testing-library/react": "^13.4.0",
@@ -54,6 +55,7 @@
     "devDependencies": {
         "@craco/craco": "^7.1.0",
         "@types/cookie-parser": "^1.4.7",
+        "@types/cors": "^2.8.17",
         "@types/express": "^4.17.21",
         "@types/jest": "^27.5.2",
         "@types/node": "^16.18.96",

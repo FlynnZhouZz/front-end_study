@@ -35,3 +35,9 @@ export type OpenRouterKeyProps = {
     /** 回调函数 */
     onCb: (key?: string) => void;
 };
+
+/** list 组件 props */
+export type ListProps = {
+    /** 列表 */
+    list: ChatProps[];
+};

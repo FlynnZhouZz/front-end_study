@@ -4,8 +4,6 @@
  * @Date: 2024-04-17 16:24:00
  * @Description: @/pages/config 类型声明
  */
-import * as React from 'react';
-import type Avatar from '@material-ui/core/Avatar';
 
 /** 用户 */
 export type User = {

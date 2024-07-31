@@ -27,7 +27,8 @@ const Name = (props: { name: ChatProps['name'] }) => {
     return <div className='name'>{name}</div>;
 };
 
-function Chat(props: ChatProps) {
+/* 聊天组件 */
+const Chat = (props: ChatProps) => {
     const { type, name, msg = '' } = props;
     return (
         <div className='chatContainer'>
