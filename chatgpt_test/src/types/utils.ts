@@ -11,3 +11,8 @@ export type FetchPayload = {
     /** fetch  */
     msg: ChatCompletionCreateParamsBase['messages'];
 };
+
+/** message type */
+export type MessageType = {
+    dom: HTMLDivElement | null;
+};

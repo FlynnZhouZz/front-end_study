@@ -4,6 +4,7 @@
  * @Date: 2024-04-17 16:24:00
  * @Description: @/components 类型声明
  */
+import { type SnackbarProps } from '@material-ui/core';
 
 /** chat组件 props */
 export type ChatProps = {
@@ -41,3 +42,9 @@ export type ListProps = {
     /** 列表 */
     list: ChatProps[];
 };
+
+/** alert 组件 props */
+export type AlertProps = {
+    /** 提示信息 */
+    content?: string;
+} & SnackbarProps;

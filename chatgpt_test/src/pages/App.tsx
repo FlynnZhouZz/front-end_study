@@ -7,7 +7,6 @@
 import React, { useEffect, useCallback, useState } from 'react';
 import { Container, IconButton, Snackbar } from '@material-ui/core';
 import VpnKeyIcon from '@material-ui/icons/VpnKey';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import type { ChatProps } from '@/types/components';
 
@@ -30,8 +29,8 @@ const App = () => {
     const [list, setList] = useState<ChatProps[]>([]);
 
     /* 获取换成api key */
-    const getKey = async () => {
-        const k = await AsyncStorage.getItem(storageKey);
+    const getKey = () => {
+        const k = localStorage.getItem(storageKey);
         if (k) {
             setKey(k);
             return true;

@@ -5,7 +5,6 @@
  * @Description: openRouter api key组件
  */
 import React, { useCallback, useEffect, useState } from 'react';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Dialog, DialogTitle, DialogContent, DialogContentText, TextField, DialogActions, Button } from '@material-ui/core';
 
 import type { OpenRouterKeyProps } from '@/types/components';
@@ -18,8 +17,8 @@ function Send(props: OpenRouterKeyProps) {
     const [key, setKey] = useState('');
 
     /* 初始化api key */
-    const intiData = async () => {
-        const k = await AsyncStorage.getItem(storageKey);
+    const intiData = () => {
+        const k = localStorage.getItem(storageKey);
         if (k) setKey(k);
     };
 
@@ -34,7 +33,9 @@ function Send(props: OpenRouterKeyProps) {
 
     /* 监听确认事件 */
     const handleConfirm = useCallback(async () => {
-        await AsyncStorage.setItem(storageKey, key);
+        // TODO
+        if (!key) return;
+        localStorage.setItem(storageKey, key);
         onCb?.(key);
         setKey('');
     }, [onCb, key]);
