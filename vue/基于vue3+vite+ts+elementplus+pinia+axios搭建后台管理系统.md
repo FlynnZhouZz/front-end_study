@@ -347,6 +347,12 @@ yarn add element-plus
 yarn add unplugin-vue-components unplugin-auto-import -D
 ```
 
+### 引用样式
+```ts
+// main.ts
+import 'element-plus/dist/index.css';
+```
+
 ### 配置 vite.config.ts
 
 ```ts
