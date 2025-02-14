@@ -522,22 +522,10 @@ body {
 
 ### 全局引入 main.scss
 
-一般情况下，修改 `vite.config.ts`
+一般情况下，修改 `main.ts`
 
 ```ts
-import { defineConfig } from 'vite';
-import vue from '@vitejs/plugin-vue';
-
-export default defineConfig({
-    plugins: [vue()],
-    css: {
-        preprocessorOptions: {
-            scss: {
-                additionalData: `@use "@/styles/element/index.scss" as *;@use "@/styles/main.scss";`, // 全局引入，element/index.scss是element的主题替换文件
-            },
-        },
-    },
-});
+import '@/styles/main.scss';
 ```
 
 --------------------------------- 分割线 ---------------------------------
