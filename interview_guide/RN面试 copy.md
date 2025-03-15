@@ -31,6 +31,8 @@ React 16.8引入Hooks
 - useContext: 用于访问上下文；
 - useMemo和UseCallback：用于优化性能
 
+### RN生命周期
+
 #### useContext使用示例：
 <!-- MyContext.js -->
 ```jsx
@@ -1419,3 +1421,112 @@ Android Profiler（Android）：用于检测 Android 应用的内存泄漏。
 
 用户认证：使用认证服务（如 Firebase Authentication）管理用户登录和身份验证。
 
+
+## RN 打包和上架
+
+### Android 打包
+
+1. 生成签名密钥
+```shell
+keytool -genkey -v -keystore my-release-key.keystore -alias my-key-alias -keyalg RSA -keysize 2048 -validity 10000
+```
+
+2. 添加签名配置, 配置 Gradle `android/app/build.gradle`
+```js
+android {
+    ...
+    signingConfigs {
+        release {
+            storeFile file('my-release-key.keystore')
+            storePassword 'your_store_password'
+            keyAlias 'your_key_alias'
+            keyPassword 'your_key_password'
+        }
+    }
+    buildTypes {
+        release {
+            ...
+            signingConfig signingConfigs.release
+        }
+    }
+}
+```
+
+3. 打包 APK
+```shell
+cd android
+./gradlew assembleRelease
+```
+
+> APK 文件会生成在 android/app/build/outputs/apk/release/ 目录下。
+
+### ios 打包
+
+1. 配置 Xcode 项目
+
+打开 ios/YourProject.xcworkspace 文件。
+
+在 Xcode 中，选择目标设备为 Generic iOS Device。
+
+进入 Product > Scheme > Edit Scheme，确保 Build Configuration 为 Release。
+
+2. 打包 IPA
+在 Xcode 中，选择 Product > Archive。
+
+打包完成后，Xcode 会自动打开 Organizer 窗口，显示生成的 .xcarchive 文件。
+
+点击 Distribute App，选择 App Store Connect，然后按照提示导出 .ipa 文件。
+
+## 上架应用
+
+### 上架到 Google Play Store
+
+1. 创建开发者账号
+访问 Google Play Console，注册并支付一次性费用（25 美元）。
+
+2. 创建应用
+登录 Google Play Console，点击 Create App。
+
+填写应用的基本信息（如名称、描述、分类等）。
+
+3. 上传 APK
+进入 Release Management > App Releases。
+
+选择 Production，点击 Create Release。
+
+上传打包好的 APK 文件。
+
+4. 填写商店信息
+进入 Store Presence > Store Listing，填写应用的详细信息（如截图、图标、描述等）。
+
+进入 Pricing & Distribution，设置价格和分发范围。
+
+5. 提交审核
+检查所有信息无误后，点击 Submit 提交审核。
+
+审核通过后，应用会自动发布到 Google Play Store。
+
+### 上架到 Apple App Store
+
+1. 创建开发者账号
+访问 Apple Developer，注册并支付年费（99 美元）。
+
+2. 创建应用
+登录 App Store Connect，点击 My Apps。
+
+点击 + 按钮，选择 New App，填写应用的基本信息。
+
+3. 上传 IPA
+安装并打开 Transporter。
+
+将打包好的 .ipa 文件拖入 Transporter，点击 Deliver 上传。
+
+4. 填写商店信息
+在 App Store Connect 中，进入 App Information，填写应用的详细信息（如名称、描述、分类等）。
+
+进入 Pricing and Availability，设置价格和分发范围。
+
+5. 提交审核
+进入 App Store > App Review，填写审核信息并提交。
+
+审核通过后，应用会自动发布到 Apple App Store。
