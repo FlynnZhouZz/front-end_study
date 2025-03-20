@@ -81,3 +81,23 @@ const example5 = () => {
     console.log(time.getDate());
 };
 example5();
+
+
+// 示例6
+const example6 = () => {
+    console.log('============ example6 =================');
+    new Promise((resolve, reject) => {resolve()}).then(() => {
+        console.log('a')
+        setTimeout(() => {
+            console.log('b')
+        });
+    });
+    setTimeout(() => {
+        console.log('c')
+        new Promise(() => {
+            console.log('d')
+        });
+    });
+    new Promise(() => console.log('e'))
+};
+example6();
